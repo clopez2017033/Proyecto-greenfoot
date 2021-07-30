@@ -8,6 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Espacio extends World
 {
+        GreenfootSound myMusic = new GreenfootSound("Musica Retro Videojuegos Sin Copyright.mp3");
     
         private counter score;
         private counter level;
@@ -36,9 +37,24 @@ public class Espacio extends World
             
         }
         
+        public static void setTimeout(Runnable runnable, int delay){
+            new Thread(() -> {
+                try {
+                    Thread.sleep(delay);
+                    runnable.run();
+                }
+                catch (Exception e){
+                    System.err.println(e);
+                }
+            }).start();
+        }
+        
         public void act(){
+            myMusic.play();
             if(numeroAsteroides <= 6){
                 anadirAsteroides();
+                setTimeout(() -> anadirAsteroides(), 2500);
+                setTimeout(() -> anadirAsteroides(), 5000);
             }
         }
         

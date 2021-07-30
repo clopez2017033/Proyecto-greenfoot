@@ -39,7 +39,10 @@ public class Rocket extends Actor
         Actor collided = getOneIntersectingObject(Asteroide.class);
         if (collided != null)
         {
+          World myWorld = getWorld();
           getWorld().removeObject(collided);
+          gameOver gameover = new gameOver();
+          myWorld.addObject(gameover, myWorld.getWidth()/2, myWorld.getHeight()/2);
           getWorld().removeObject(this);
           Greenfoot.stop();
         }
